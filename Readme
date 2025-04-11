@@ -1,0 +1,41 @@
+Diferencias entre Decorator y Proxy
+Principales diferencias
+Después de revisar ambos patrones, la principal diferencia entre Decorator y Proxy radica en su propósito:
+
+Decorator: Añade funcionalidades adicionales o comportamientos a un objeto existente sin modificar su estructura básica. Se enfoca en extender dinámicamente la funcionalidad.
+Proxy: Controla el acceso al objeto original, actuando como intermediario. El proxy puede realizar operaciones antes o después de pasar la solicitud al objeto original, pero su propósito principal es controlar el acceso, no añadir nuevas funcionalidades.
+
+Escenarios de uso
+Decorator
+
+Cuando necesitas añadir responsabilidades a objetos de forma dinámica y transparente
+Cuando la extensión mediante herencia no es viable o resulta impráctica
+Cuando necesitas combinar múltiples comportamientos (como notificaciones por email + SMS + Facebook)
+Para implementar funcionalidades que pueden ser añadidas o eliminadas en tiempo de ejecución
+
+Ejemplo real: Un sistema de café donde puedes añadir extras como leche, canela o chocolate a una bebida base.
+Proxy
+
+Para implementar inicialización diferida (crear objetos pesados solo cuando sean necesarios)
+Para controlar el acceso a recursos (verificación de permisos)
+Para implementar cachés de resultados
+Para trabajar con servicios remotos
+Para registrar solicitudes (logging)
+
+Ejemplo real: Un sistema de imágenes donde el proxy carga la imagen real solo cuando es necesario verla, ahorrando recursos.
+
+Explicación de la implementación:
+
+Definí la interfaz Bebida que establece los métodos comunes (getDescripcion() y getPrecio()).
+Implementé componentes concretos: Espresso y Americano, cada uno con su precio base.
+Creé una clase decoradora abstracta DecoradorBebida que mantiene una referencia al objeto decorado y delega las operaciones básicas.
+Definí tres decoradores concretos:
+
+DecoradorLeche: añade leche y $0.50 al precio
+DecoradorChocolate: añade chocolate y $0.70 al precio
+DecoradorCanela: añade canela y $0.30 al precio
+
+
+En la clase cliente SistemaCafe, demostré cómo se pueden ir añadiendo decoradores a una bebida base, acumulando tanto la descripción como el precio.
+
+Esta implementación muestra claramente cómo el patrón Decorator permite añadir funcionalidades de forma dinámica y combinarlas sin necesidad de crear subclases específicas para cada combinación posible.
